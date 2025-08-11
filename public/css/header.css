@@ -1,0 +1,5 @@
+.header {
+  padding: var(--space-medium) 0;
+  text-align: center;
+  background-color: honeydew;
+}
