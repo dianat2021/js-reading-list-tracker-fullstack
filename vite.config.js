@@ -2,15 +2,15 @@ import { defineConfig } from "vite";
 import path from "path";
 
 export default defineConfig({
-  root: "public", // Set public as the root
-  publicDir: "public", // Ensures assets are served correctly
+  root: "public",
+  publicDir: "public",
   build: {
-    outDir: "dist", // Output compiled files here
+    outDir: "dist",
     rollupOptions: {
-      input: path.resolve(__dirname, "public/index.html"), // Define entry point
+      input: path.resolve(__dirname, "public/index.html"),
     },
   },
   server: {
-    open: true, // Auto open browser on start
+    open: true,
   },
 });
