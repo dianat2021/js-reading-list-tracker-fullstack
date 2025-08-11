@@ -5,6 +5,8 @@ const displayLogin = () => {
   const loginFormContainer = document.createElement("div");
   const loginForm = document.createElement("form");
   const loginFormTitle = document.createElement("h2");
+  const emailContainer = document.createElement("div");
+  const passwordContainer = document.createElement("div");
   const emailLabel = document.createElement("label");
   const passwordLabel = document.createElement("label");
   const emailInput = document.createElement("input");
@@ -18,13 +20,13 @@ const displayLogin = () => {
   loginFormContainer.append(loginForm);
   loginForm.append(
     loginFormTitle,
-    emailLabel,
-    passwordLabel,
-    emailInput,
-    passwordInput,
+    emailContainer,
+    passwordContainer,
     loginButton,
     switchToRegister
   );
+  emailContainer.append(emailLabel, emailInput);
+  passwordContainer.append(passwordLabel, passwordInput);
   switchToRegister.append("Don't have an account? ", registerFormLink);
   // Populating elements and adding attributes
   loginFormTitle.textContent = "Login";
@@ -44,6 +46,14 @@ const displayLogin = () => {
   registerFormLink.href = "#";
 
   // Adding class names
+  loginFormContainer.classList.add("login-container");
+  loginForm.classList.add("login-form");
+  loginFormTitle.classList.add("login-form__title");
+  emailContainer.classList.add("login-form__email-container");
+  passwordContainer.classList.add("login-form__password-container");
+  emailInput.classList.add("login-form__email-input");
+  passwordInput.classList.add("login-form__password-input");
+  loginButton.classList.add("login-form__submit-button");
 };
 
 export default displayLogin;
