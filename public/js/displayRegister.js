@@ -1,3 +1,5 @@
+import displayLogin from "./displayLogin";
+
 const displayRegister = () => {
   // Selecting main and clearing the existing content
   const main = document.querySelector("main");
@@ -76,6 +78,12 @@ const displayRegister = () => {
   registerForm.classList.add("register-form");
   registerFormTitle.classList.add("register-form__title");
   registerButton.classList.add("register-form__submit-button");
+
+  // Adding event listeners
+  loginFormLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    displayLogin();
+  });
 };
 
 export default displayRegister;

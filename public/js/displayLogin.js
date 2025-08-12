@@ -1,3 +1,5 @@
+import displayRegister from "./displayRegister";
+
 const displayLogin = () => {
   const main = document.querySelector("main");
   main.innerHTML = "";
@@ -55,6 +57,13 @@ const displayLogin = () => {
   emailInput.classList.add("login-form__email-input");
   passwordInput.classList.add("login-form__password-input");
   loginButton.classList.add("login-form__submit-button");
+  registerFormLink.classList.add("login-form__register-link");
+
+  // Adding event listeners
+  registerFormLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    displayRegister();
+  });
 };
 
 export default displayLogin;
