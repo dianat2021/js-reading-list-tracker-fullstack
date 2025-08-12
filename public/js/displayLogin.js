@@ -1,5 +1,6 @@
 const displayLogin = () => {
   const main = document.querySelector("main");
+  main.innerHTML = "";
 
   // Creating elements
   const loginFormContainer = document.createElement("div");
