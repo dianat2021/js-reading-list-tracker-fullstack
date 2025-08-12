@@ -82,6 +82,7 @@ const displayRegister = () => {
   // Adding event listeners
   loginFormLink.addEventListener("click", (e) => {
     e.preventDefault();
+    history.pushState(null, "", "/login");
     displayLogin();
   });
 };
