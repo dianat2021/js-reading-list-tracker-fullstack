@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { authRouter } from "./routes/authRoutes.js";
 import { bookRouter } from "./routes/bookRouter.js";
+import connectDB from "./db/connectDB.js";
 
 // Load environment variables
 dotenv.config();
@@ -16,8 +17,9 @@ app.use(express.json());
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/books", bookRouter);
 // Initialize app
-const initializeApp = () => {
+const initializeApp = async () => {
   try {
+    await connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}...`);
     });
