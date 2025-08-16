@@ -1,6 +1,5 @@
 import { User } from "../models/userModel.js";
 import { StatusCodes } from "http-status-codes";
-import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   try {
     // const { firstname, lastname, email, passwrod } = req.body;
@@ -8,11 +7,7 @@ export const register = async (req, res) => {
     //   res.status(StatusCodes.BAD_REQUEST).send("validation error");
     // }
     const user = await User.create(req.body);
-    const token = jwt.sign(
-      { userID: user._id, firstname: user.firstname },
-      "jwtSecret",
-      { expiresIn: "30d" }
-    );
+    const token = user.generateJWT();
     res.status(StatusCodes.CREATED).json({ user: user.firstname, token });
   } catch (error) {
     res.send(error);
