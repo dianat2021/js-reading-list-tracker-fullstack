@@ -48,9 +48,9 @@ userSchema.methods.generateJWT = function () {
       firstname: this.firstname,
       lastname: this.lastname,
     },
-    "secretKey",
+    process.env.JWT_SECRET_KEY,
     {
-      expiresIn: "30d",
+      expiresIn: process.env.JWT_EXPIRATION,
     }
   );
 };
