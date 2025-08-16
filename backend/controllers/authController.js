@@ -14,5 +14,19 @@ export const register = async (req, res) => {
   }
 };
 export const login = async (req, res) => {
-  res.send("Login user...");
+  const { email, password } = req.body;
+  if (!email || !password) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .send("Please provide email and password");
+  }
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(StatusCodes.UNAUTHORIZED).send("Invalid credentials");
+  }
+
+  const token = user.generateJWT();
+  res.status(StatusCodes.OK).json({
+    user: { firstname: user.firstname, lastname: user.lastname, token },
+  });
 };
