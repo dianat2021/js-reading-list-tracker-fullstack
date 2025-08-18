@@ -5,7 +5,7 @@ export const getBook = async (req, res) => {
   res.send("Get a book");
 };
 export const createBook = async (req, res) => {
-  res.send("Create a book");
+  res.json(req.user);
 };
 export const deleteBook = async (req, res) => {
   res.send("Delete a book");

@@ -1,13 +1,17 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/userModel";
+// import { User } from "../models/userModel";
 import { StatusCodes } from "http-status-codes";
 
-export const auth = async (req, res, next) => {
+export const authenticateUser = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+  console.log(authHeader);
+
   if (!authHeader || !authHeader.startsWith("Bearer")) {
-    res.status(StatusCodes.UNAUTHORIZED).send("Invalid authentication");
+    return res.status(StatusCodes.UNAUTHORIZED).send("Invalid authentication");
   }
   const token = authHeader.split(" ")[1];
+  console.log("Token", token);
+
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
     // Attaching the authenticated user to the request.body

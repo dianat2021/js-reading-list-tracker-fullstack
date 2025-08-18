@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { authRouter } from "./routes/authRoutes.js";
 import { bookRouter } from "./routes/bookRouter.js";
 import connectDB from "./db/connectDB.js";
+import { authenticateUser } from "./middleware/authentication.js";
 
 // Load environment variables
 dotenv.config();
@@ -14,8 +15,9 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/books", bookRouter);
+// We can add authenticateUser to each route separately but this is a better approach
+app.use("/api/v1/auth", authenticateUser, authRouter);
+app.use("/api/v1/books", authenticateUser, bookRouter);
 // Initialize app
 const initializeApp = async () => {
   try {
