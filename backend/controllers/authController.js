@@ -14,17 +14,26 @@ export const register = async (req, res) => {
   }
 };
 export const login = async (req, res) => {
+  // Extracting email and password from the req.body
   const { email, password } = req.body;
+  // Throwing error if email or password are not provided
   if (!email || !password) {
     res
       .status(StatusCodes.BAD_REQUEST)
       .send("Please provide email and password");
   }
+  // If email and password are provided, try to find the user
   const user = await User.findOne({ email });
+  // If user does not exist, throw an error
   if (!user) {
     res.status(StatusCodes.UNAUTHORIZED).send("Invalid credentials");
   }
-
+  // Checking of the provided password matches the password registered in the database
+  const isUserPassCorrect = await user.checkPassword(password);
+  // If the provided password does not match the password registered in the database, throw an error
+  if (!isUserPassCorrect) {
+    res.status(StatusCodes.UNAUTHORIZED).send("Invalid credentials");
+  }
   const token = user.generateJWT();
   res.status(StatusCodes.OK).json({
     user: { firstname: user.firstname, lastname: user.lastname, token },
