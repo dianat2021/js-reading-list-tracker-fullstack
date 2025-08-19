@@ -7,6 +7,7 @@ export const register = async (req, res) => {
     //   res.status(StatusCodes.BAD_REQUEST).send("validation error");
     // }
     const user = await User.create(req.body);
+
     const token = user.generateJWT();
     res.status(StatusCodes.CREATED).json({ user: user.firstname, token });
   } catch (error) {

@@ -6,6 +6,7 @@ export const getAllBooks = async (req, res) => {
     const books = await Book.find({ createdBy: req.user.userID }).sort(
       "createdAt"
     );
+
     res.status(StatusCodes.OK).json({ books, total: books.length });
   } catch (error) {
     res
@@ -14,7 +15,15 @@ export const getAllBooks = async (req, res) => {
   }
 };
 export const getBook = async (req, res) => {
-  res.send("Get a book");
+  const {
+    user: { userID },
+    params: { id: bookID },
+  } = req;
+  const book = await Book.find({ _id: bookID, createdBy: userID });
+  if (!book) {
+    res.status(StatusCodes.NOT_FOUND).send("Did not find the book");
+  }
+  res.status(StatusCodes.OK).json(book);
 };
 export const createBook = async (req, res) => {
   try {

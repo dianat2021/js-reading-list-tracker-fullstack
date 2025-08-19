@@ -15,8 +15,8 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
-// We can add authenticateUser to each route separately but this is a better approach
-app.use("/api/v1/auth", authenticateUser, authRouter);
+// We can add authenticateUser to each route separately but this is a better approachbooks
+app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/books", authenticateUser, bookRouter);
 // Initialize app
 const initializeApp = async () => {
