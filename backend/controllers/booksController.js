@@ -14,17 +14,25 @@ export const getAllBooks = async (req, res) => {
       .json({ error: error.message });
   }
 };
+// Get single book ---------------------------------------------------------
 export const getBook = async (req, res) => {
-  const {
-    user: { userID },
-    params: { id: bookID },
-  } = req;
-  const book = await Book.find({ _id: bookID, createdBy: userID });
-  if (!book) {
-    res.status(StatusCodes.NOT_FOUND).send("Did not find the book");
+  try {
+    const {
+      user: { userID },
+      params: { id: bookID },
+    } = req;
+    const book = await Book.findOne({ _id: bookID, createdBy: userID });
+    if (!book) {
+      return res.status(StatusCodes.NOT_FOUND).send("Did not find the book");
+    }
+    res.status(StatusCodes.OK).json(book);
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
   }
-  res.status(StatusCodes.OK).json(book);
 };
+// Create book ---------------------------------------------------------
 export const createBook = async (req, res) => {
   try {
     req.body.createdBy = req.user.userID;
@@ -36,9 +44,37 @@ export const createBook = async (req, res) => {
     });
   }
 };
+// Delete book ---------------------------------------------------------
 export const deleteBook = async (req, res) => {
   res.send("Delete a book");
 };
+// Update book ---------------------------------------------------------
 export const updateBook = async (req, res) => {
-  res.send("Update a book");
+  try {
+    const {
+      body: { bookTitle, bookAuthor, startingDate, readingStatus },
+      user: { userID },
+      params: { id: bookID },
+    } = req;
+    const updateData = { bookTitle, bookAuthor, startingDate, readingStatus };
+
+    if (!bookTitle || !bookAuthor || !startingDate || !readingStatus) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .send("All the fields must be provided");
+    }
+    const book = await Book.findOneAndUpdate(
+      { _id: bookID, createdBy: userID },
+      updateData,
+      { new: true, runValidators: true }
+    );
+    if (!book) {
+      return res.status(StatusCodes.NOT_FOUND).send("Did not find the book");
+    }
+    res.status(StatusCodes.OK).json(book);
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: error.message || "Something went wrong while editing the book.",
+    });
+  }
 };
