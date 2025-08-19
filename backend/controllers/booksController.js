@@ -46,7 +46,26 @@ export const createBook = async (req, res) => {
 };
 // Delete book ---------------------------------------------------------
 export const deleteBook = async (req, res) => {
-  res.send("Delete a book");
+  try {
+    const {
+      user: { userID },
+      params: { id: bookID },
+    } = req;
+
+    const book = await Book.findOneAndDelete({
+      _id: bookID,
+      createdBy: userID,
+    });
+
+    if (!book) {
+      return res.status(StatusCodes.NOT_FOUND).send("Did not find the book");
+    }
+    res.status(StatusCodes.OK).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: error.message || "Something went wrong while deleting the book.",
+    });
+  }
 };
 // Update book ---------------------------------------------------------
 export const updateBook = async (req, res) => {
