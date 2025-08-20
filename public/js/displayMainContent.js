@@ -1,3 +1,4 @@
+import { displayAddForm } from "./displayAddForm";
 import { displayFilterSort } from "./displayFilterSort";
 
 const displayMainContent = () => {
@@ -7,6 +8,7 @@ const displayMainContent = () => {
   main.innerHTML = "";
 
   displayFilterSort();
+  displayAddForm();
 };
 
 export default displayMainContent;
