@@ -1,0 +1,25 @@
+.add-form-container {
+  width: 100%;
+  padding: var(--space-medium) 0;
+  border: 2px solid black;
+}
+.add-form {
+  width: 80%;
+  margin: 0 auto;
+}
+.add-form-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+}
+.book-title-container > *,
+.book-author-container > *,
+.book-date-container > *,
+.book-status-container > * {
+  display: block;
+}
+.add-form__submit-button {
+  display: block;
+  margin: var(--space-medium) auto 0 auto;
+}

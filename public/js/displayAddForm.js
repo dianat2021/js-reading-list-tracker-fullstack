@@ -4,6 +4,8 @@ export const displayAddForm = () => {
   const addFormContainer = document.createElement("div");
   const addForm = document.createElement("form");
   const addFormInputWrapper = document.createElement("div");
+  const TitleAuthorContainer = document.createElement("div");
+  const dateStatusContainer = document.createElement("div");
   const bookTitleContainer = document.createElement("div");
   const bookAuthorContainer = document.createElement("div");
   const bookStartingDateContainer = document.createElement("div");
@@ -22,13 +24,13 @@ export const displayAddForm = () => {
   // Appending elements
   main.append(addFormContainer);
   addFormContainer.append(addForm);
-  addForm.append(addFormInputWrapper);
-  addFormInputWrapper.append(
-    bookTitleContainer,
-    bookAuthorContainer,
-    bookStartingDateContainer,
-    bookReadingStatusContainer
-  );
+  addForm.append(addFormInputWrapper, submitButton);
+  addFormInputWrapper.append(TitleAuthorContainer, dateStatusContainer);
+  TitleAuthorContainer.append(bookTitleContainer, bookAuthorContainer),
+    dateStatusContainer.append(
+      bookStartingDateContainer,
+      bookReadingStatusContainer
+    );
   bookTitleContainer.append(bookTitleLabel, bookTitleInput);
   bookAuthorContainer.append(bookAuthorLabel, bookAuthorInput);
   bookStartingDateContainer.append(
@@ -69,6 +71,14 @@ export const displayAddForm = () => {
     statusOption.value = option.toLocaleLowerCase();
     bookReadingStatusSelect.append(statusOption);
   });
-
+  submitButton.textContent = "Submit";
   //Adding class names
+  addFormContainer.classList.add("add-form-container");
+  addForm.classList.add("add-form");
+  addFormInputWrapper.classList.add("add-form-wrapper");
+  bookTitleContainer.classList.add("book-title-container");
+  bookAuthorContainer.classList.add("book-author-container");
+  bookStartingDateContainer.classList.add("book-date-container");
+  bookReadingStatusContainer.classList.add("book-status-container");
+  submitButton.classList.add("add-form__submit-button");
 };
