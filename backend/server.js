@@ -7,6 +7,7 @@ import { authenticateUser } from "./middleware/authentication.js";
 import helmet from "helmet";
 import cors from "cors";
 import xss from "xss-clean";
+import rateLimit from "express-rate-limit";
 // Load environment variables
 dotenv.config();
 
@@ -14,6 +15,14 @@ dotenv.config();
 const PORT = process.env.PORT || 6006;
 // Initializing express
 const app = express();
+
+// Limit request
+app.set("trust proxy", true);
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 100,
+});
+app.use(limiter);
 
 // Middlewares
 app.use(express.json());
