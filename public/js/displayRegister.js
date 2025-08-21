@@ -1,6 +1,7 @@
-import displayLogin from "./displayLogin";
+import displayLogin from "./displayLogin.js";
+import register from "./register.js";
 
-const displayRegister = () => {
+export const displayRegister = () => {
   // Selecting main and clearing the existing content
   const main = document.querySelector("main");
   main.innerHTML = "";
@@ -78,6 +79,11 @@ const displayRegister = () => {
   registerForm.classList.add("register-form");
   registerFormTitle.classList.add("register-form__title");
   registerButton.classList.add("register-form__submit-button");
+  firstnameInput.classList.add("register-form__firstname-input");
+  lastnameInput.classList.add("register-form__lastname-input");
+  emailInput.classList.add("register-form__email-input");
+  passwordInput.classList.add("register-form__password-input");
+  repeatPasswordInput.classList.add("register-form__repeatpassword-input");
 
   // Adding event listeners
   loginFormLink.addEventListener("click", (e) => {
@@ -87,4 +93,24 @@ const displayRegister = () => {
   });
 };
 
-export default displayRegister;
+export const setupRegisterForm = () => {
+  const form = document.querySelector(".register-form");
+  if (!form) return;
+
+  const firstname = document.querySelector(".register-form__firstname-input");
+  const lastname = document.querySelector(".register-form__lastname-input");
+  const email = document.querySelector(".register-form__email-input");
+  const password = document.querySelector(".register-form__password-input");
+  const repeatPassword = document.querySelector(
+    ".register-form__repeatpassword-input"
+  );
+
+  form.addEventListener(
+    "submit",
+    async (e) => {
+      e.preventDefault();
+      register(firstname, lastname, email, password, repeatPassword);
+    },
+    { once: true }
+  );
+};

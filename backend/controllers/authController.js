@@ -19,7 +19,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
   // Throwing error if email or password are not provided
   if (!email || !password) {
-    res
+    return res
       .status(StatusCodes.BAD_REQUEST)
       .send("Please provide email and password");
   }
@@ -27,13 +27,13 @@ export const login = async (req, res) => {
   const user = await User.findOne({ email });
   // If user does not exist, throw an error
   if (!user) {
-    res.status(StatusCodes.UNAUTHORIZED).send("Invalid credentials");
+    return res.status(StatusCodes.UNAUTHORIZED).send("Invalid credentials");
   }
   // Checking of the provided password matches the password registered in the database
   const isUserPassCorrect = await user.checkPassword(password);
   // If the provided password does not match the password registered in the database, throw an error
   if (!isUserPassCorrect) {
-    res.status(StatusCodes.UNAUTHORIZED).send("Invalid credentials");
+    return res.status(StatusCodes.UNAUTHORIZED).send("Invalid credentials");
   }
   const token = user.generateJWT();
   res.status(StatusCodes.OK).json({

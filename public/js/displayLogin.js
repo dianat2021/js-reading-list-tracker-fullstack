@@ -1,4 +1,4 @@
-import displayRegister from "./displayRegister";
+import { displayRegister } from "./displayRegister.js";
 
 const displayLogin = () => {
   const main = document.querySelector("main");

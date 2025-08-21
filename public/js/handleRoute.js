@@ -1,5 +1,5 @@
 import displayLogin from "./displayLogin.js";
-import displayRegister from "./displayRegister.js";
+import { displayRegister, setupRegisterForm } from "./displayRegister.js";
 import displayMainContent from "./displayMainContent.js";
 
 const handleRoute = () => {
@@ -9,6 +9,7 @@ const handleRoute = () => {
     displayLogin();
   } else if (path === "/register") {
     displayRegister();
+    setupRegisterForm();
   } else if (path === "/main") {
     displayMainContent();
   } else {

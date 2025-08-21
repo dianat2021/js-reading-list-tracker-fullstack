@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 6006;
 const app = express();
 
 // Limit request
-app.set("trust proxy", true);
+app.set("trust proxy", 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 100,
@@ -29,7 +29,8 @@ app.use(express.json());
 // Security packages
 app.use(helmet());
 app.use(cors());
-app.use(xss());
+// app.use(xss());
+
 // We can add authenticateUser to each route separately but this is a better approachbooks
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/books", authenticateUser, bookRouter);
