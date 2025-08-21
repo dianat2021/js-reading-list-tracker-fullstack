@@ -81,4 +81,8 @@ export const displayAddForm = () => {
   bookStartingDateContainer.classList.add("book-date-container");
   bookReadingStatusContainer.classList.add("book-status-container");
   submitButton.classList.add("add-form__submit-button");
+  bookTitleInput.classList.add("add-form__title-input");
+  bookAuthorInput.classList.add("add-form__author-input");
+  bookStartingDateInput.classList.add("add-form__date-input");
+  bookReadingStatusSelect.classList.add("add-form__status-select");
 };
