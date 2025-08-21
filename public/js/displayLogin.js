@@ -1,6 +1,7 @@
 import { displayRegister } from "./displayRegister.js";
+import { login } from "./login.js";
 
-const displayLogin = () => {
+export const displayLogin = () => {
   const main = document.querySelector("main");
   main.innerHTML = "";
 
@@ -47,6 +48,7 @@ const displayLogin = () => {
   emailInput.placeholder = "Enter your email address";
   passwordInput.placeholder = "Enter your password";
   registerFormLink.href = "#";
+  passwordInput.type = "password";
 
   // Adding class names
   loginFormContainer.classList.add("login-container");
@@ -67,4 +69,26 @@ const displayLogin = () => {
   });
 };
 
-export default displayLogin;
+export const setupLoginForm = async () => {
+  try {
+    const loginForm = document.querySelector(".login-form");
+    const email = document.querySelector(".login-form__email-input");
+    const password = document.querySelector(".login-form__password-input");
+
+    loginForm.addEventListener("submit", async (e) => {
+      try {
+        e.preventDefault();
+        const isLoginSuccessful = await login(email, password);
+        if (isLoginSuccessful) {
+          window.location.href = "/main";
+        } else {
+          console.log("failed to login");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

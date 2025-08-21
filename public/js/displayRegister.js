@@ -1,4 +1,4 @@
-import displayLogin from "./displayLogin.js";
+import { displayLogin } from "./displayLogin.js";
 import register from "./register.js";
 
 export const displayRegister = () => {
@@ -109,7 +109,7 @@ export const setupRegisterForm = () => {
     "submit",
     async (e) => {
       e.preventDefault();
-      register(firstname, lastname, email, password, repeatPassword);
+      await register(firstname, lastname, email, password, repeatPassword);
     },
     { once: true }
   );
