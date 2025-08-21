@@ -23,7 +23,7 @@ const bookSchema = new mongoose.Schema(
     readingStatus: {
       type: String,
       enum: {
-        values: ["ongoing", "finished", "stopped"],
+        values: ["reading", "finished", "stopped"],
         message: `{VALUE} is not supported`,
       },
       required: [true, "Reading status is required"],

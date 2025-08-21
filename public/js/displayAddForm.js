@@ -1,3 +1,5 @@
+import addBook from "./addBook.js";
+
 export const displayAddForm = () => {
   const main = document.querySelector("main");
   const statusOptions = ["Reading", "Finished", "Stopped"];
@@ -58,6 +60,7 @@ export const displayAddForm = () => {
   bookAuthorInput.name = "author";
   bookStartingDateInput.name = "starting-date";
   bookReadingStatusSelect.name = "reading-status";
+  bookStartingDateInput.type = "date";
 
   // Populating elements
   bookTitleLabel.textContent = "Title";
@@ -85,4 +88,22 @@ export const displayAddForm = () => {
   bookAuthorInput.classList.add("add-form__author-input");
   bookStartingDateInput.classList.add("add-form__date-input");
   bookReadingStatusSelect.classList.add("add-form__status-select");
+};
+
+export const setupAddForm = () => {
+  const addForm = document.querySelector(".add-form");
+  const titleInput = document.querySelector(".add-form__title-input");
+  const authorInput = document.querySelector(".add-form__author-input");
+  const dateInput = document.querySelector(".add-form__date-input");
+  const statusSelect = document.querySelector(".add-form__status-select");
+
+  addForm.addEventListener(
+    "submit",
+    async (e) => {
+      e.preventDefault();
+      await addBook(titleInput, authorInput, dateInput, statusSelect);
+      console.log("book added successfully");
+    },
+    { once: true }
+  );
 };
