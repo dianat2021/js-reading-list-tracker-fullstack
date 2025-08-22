@@ -1,5 +1,6 @@
 import { displayRegister } from "./displayRegister.js";
 import { login } from "./login.js";
+import { validateLoginForm } from "./validateLoginForm.js";
 
 export const displayLogin = () => {
   const main = document.querySelector("main");
@@ -18,6 +19,8 @@ export const displayLogin = () => {
   const loginButton = document.createElement("button");
   const switchToRegister = document.createElement("p");
   const registerFormLink = document.createElement("a");
+  const loginFormEmailError = document.createElement("span");
+  const loginFormPasswordError = document.createElement("span");
 
   // Appending elements
   main.append(loginFormContainer);
@@ -29,8 +32,12 @@ export const displayLogin = () => {
     loginButton,
     switchToRegister
   );
-  emailContainer.append(emailLabel, emailInput);
-  passwordContainer.append(passwordLabel, passwordInput);
+  emailContainer.append(emailLabel, emailInput, loginFormEmailError);
+  passwordContainer.append(
+    passwordLabel,
+    passwordInput,
+    loginFormPasswordError
+  );
   switchToRegister.append("Don't have an account? ", registerFormLink);
   // Populating elements and adding attributes
   loginFormTitle.textContent = "Login";
@@ -60,6 +67,8 @@ export const displayLogin = () => {
   passwordInput.classList.add("login-form__password-input");
   loginButton.classList.add("login-form__submit-button");
   registerFormLink.classList.add("login-form__register-link");
+  loginFormEmailError.classList.add("login-form__email-error");
+  loginFormPasswordError.classList.add("login-form__password-error");
 
   // Adding event listeners
   registerFormLink.addEventListener("click", (e) => {
@@ -78,6 +87,9 @@ export const setupLoginForm = async () => {
     loginForm.addEventListener("submit", async (e) => {
       try {
         e.preventDefault();
+        if (!validateLoginForm()) {
+          return;
+        }
         const isLoginSuccessful = await login(email, password);
         if (isLoginSuccessful) {
           window.location.href = "/main";
