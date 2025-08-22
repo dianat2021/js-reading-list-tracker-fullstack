@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-input {
+input,
+select {
   font-family: inherit;
   padding: 0 var(--space-x-small);
 }

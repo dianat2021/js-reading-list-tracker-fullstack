@@ -55,5 +55,6 @@ export const renderBooks = async () => {
     booksWrapper.classList.add("books");
     bookCard.classList.add("book-card");
     bookDetailsContainer.classList.add("book-card__details-container");
+    bookButtonsContainer.classList.add("book-card__buttons-container");
   });
 };

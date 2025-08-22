@@ -10,6 +10,7 @@ export const displayFilterSort = () => {
   ];
   // Creating elements
   const sortFilterComponent = document.createElement("div");
+  const sortFilterWrapper = document.createElement("div");
   const sortContainer = document.createElement("div");
   const filterContainer = document.createElement("div");
   const filterLabel = document.createElement("label");
@@ -20,7 +21,8 @@ export const displayFilterSort = () => {
   const sortPlaceHolderOption = document.createElement("option");
   // Appending elements
   main.append(sortFilterComponent);
-  sortFilterComponent.append(sortContainer, filterContainer);
+  sortFilterComponent.append(sortFilterWrapper);
+  sortFilterWrapper.append(sortContainer, filterContainer);
   filterContainer.append(filterLabel, filterSelect);
   sortContainer.append(sortLabel, sortSelect);
   filterSelect.append(filterPlaceHolderOption);
@@ -54,6 +56,7 @@ export const displayFilterSort = () => {
 
   // Adding classnames
   sortFilterComponent.classList.add("sort-filter");
+  sortFilterWrapper.classList.add("sort-filter-wrapper");
   sortContainer.classList.add("sort");
   filterContainer.classList.add("filter");
 };

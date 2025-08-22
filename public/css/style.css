@@ -1,3 +1,7 @@
+@font-face {
+  font-family: AnekLatin;
+  src: url("../assets/fonts/AnekLatin.ttf");
+}
 html,
 body {
   width: 100%;
@@ -6,6 +10,7 @@ body {
   background-color: darkgrey;
   display: flex;
   flex-direction: column;
+  font-family: AnekLatin;
 }
 main {
   width: 100%;

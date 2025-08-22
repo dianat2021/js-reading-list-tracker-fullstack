@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--background-color-dark);
 }
 .login-form {
   display: flex;
@@ -12,7 +13,7 @@
   gap: var(--space-small);
   padding: var(--space-medium);
   border-radius: var(--border-radius-medium);
-  background-color: azure;
+  background-color: var(--background-color-medium);
 }
 .login-form__title {
   text-align: center;

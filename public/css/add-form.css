@@ -1,7 +1,7 @@
 .add-form-container {
   width: 100%;
-  padding: var(--space-medium) 0;
-  border: 2px solid black;
+  padding: var(--space-medium);
+  background-color: var(--background-color-medium);
 }
 .add-form {
   width: 80%;
@@ -11,7 +11,11 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-medium);
   align-items: center;
+}
+.add-form-wrapper div {
+  flex: 1;
 }
 .book-title-container > *,
 .book-author-container > *,
@@ -19,8 +23,17 @@
 .book-status-container > * {
   display: block;
 }
+.add-form__title-input,
+.add-form__author-input,
+.add-form__date-input,
+.add-form__status-select {
+  height: 24px;
+  width: 100%;
+}
 .add-form__submit-button {
   display: block;
+  height: 24px;
+  width: 200px;
   margin: var(--space-medium) auto 0 auto;
 }
 .add-form__input--error {
