@@ -1,5 +1,6 @@
 import { displayLogin } from "./displayLogin.js";
 import register from "./register.js";
+import { validateRegisterForm } from "./validateForms.js";
 
 export const displayRegister = () => {
   // Selecting main and clearing the existing content
@@ -28,7 +29,11 @@ export const displayRegister = () => {
   const registerButton = document.createElement("button");
   const switchToLogin = document.createElement("p");
   const loginFormLink = document.createElement("a");
-
+  const firstnameError = document.createElement("span");
+  const lastnameError = document.createElement("span");
+  const emailError = document.createElement("span");
+  const passwordError = document.createElement("span");
+  const repeatPasswordError = document.createElement("span");
   // Appending elements
   main.append(registerFormContainer);
   registerFormContainer.append(registerForm);
@@ -42,11 +47,15 @@ export const displayRegister = () => {
     switchToLogin,
     registerButton
   );
-  firstnameContainer.append(firstnameLabel, firstnameInput);
-  lastnameContainer.append(lastnameLabel, lastnameInput);
-  emailContainer.append(emailLabel, emailInput);
-  passwordContainer.append(passwordLabel, passwordInput);
-  RepeatpasswordContainer.append(repeatPasswordLabel, repeatPasswordInput);
+  firstnameContainer.append(firstnameLabel, firstnameInput, firstnameError);
+  lastnameContainer.append(lastnameLabel, lastnameInput, lastnameError);
+  emailContainer.append(emailLabel, emailInput, emailError);
+  passwordContainer.append(passwordLabel, passwordInput, passwordError);
+  RepeatpasswordContainer.append(
+    repeatPasswordLabel,
+    repeatPasswordInput,
+    repeatPasswordError
+  );
   switchToLogin.append("Already have an account? ", loginFormLink);
 
   // Populating elements and adding attributes
@@ -84,6 +93,11 @@ export const displayRegister = () => {
   emailInput.classList.add("register-form__email-input");
   passwordInput.classList.add("register-form__password-input");
   repeatPasswordInput.classList.add("register-form__repeatpassword-input");
+  firstnameError.classList.add("register-form__firstname-error");
+  lastnameError.classList.add("register-form__lastname-error");
+  emailError.classList.add("register-form__email-error");
+  passwordError.classList.add("register-form__password-error");
+  repeatPasswordError.classList.add("register-form__repeatpassword-error");
 
   // Adding event listeners
   loginFormLink.addEventListener("click", (e) => {
@@ -105,12 +119,12 @@ export const setupRegisterForm = () => {
     ".register-form__repeatpassword-input"
   );
 
-  form.addEventListener(
-    "submit",
-    async (e) => {
-      e.preventDefault();
-      await register(firstname, lastname, email, password, repeatPassword);
-    },
-    { once: true }
-  );
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!validateRegisterForm()) {
+      return;
+    }
+
+    await register(firstname, lastname, email, password, repeatPassword);
+  });
 };
