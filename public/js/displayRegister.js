@@ -1,6 +1,6 @@
 import { displayLogin } from "./displayLogin.js";
 import register from "./register.js";
-import { validateRegisterForm } from "./validateForms.js";
+import { validateRegisterForm } from "./validateRegisterForm.js";
 
 export const displayRegister = () => {
   // Selecting main and clearing the existing content

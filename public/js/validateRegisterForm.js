@@ -45,26 +45,36 @@ export const validateRegisterForm = () => {
     repeatPassError,
   ].forEach((errorMsg) => {
     errorMsg.textContent = "";
+    errorMsg.classList.remove("register-form__input--error");
   });
 
   if (!registerFormFirstname.value.trim()) {
     firstnameError.textContent = registerFormErrors.firstnameError;
+    firstnameError.classList.add("register-form__input--error");
     isRegisterFormValid = false;
   }
   if (!registerFormLastname.value.trim()) {
     lastnameError.textContent = registerFormErrors.lastnameError;
+    lastnameError.classList.add("register-form__input--error");
+
     isRegisterFormValid = false;
   }
   if (!registerFormEmail.value.trim()) {
     emailError.textContent = registerFormErrors.emailError;
+    emailError.classList.add("register-form__input--error");
+
     isRegisterFormValid = false;
   }
   if (!registerFormPassword.value.trim()) {
     passwordError.textContent = registerFormErrors.passwordError;
+    passwordError.classList.add("register-form__input--error");
+
     isRegisterFormValid = false;
   }
   if (!registerFormRepeatPass.value.trim()) {
     repeatPassError.textContent = registerFormErrors.repeatPasswordError;
+    repeatPassError.classList.add("register-form__input--error");
+
     isRegisterFormValid = false;
   }
   if (
@@ -79,7 +89,6 @@ export const validateRegisterForm = () => {
       isRegisterFormValid = false;
     }
   }
-  console.log(isRegisterFormValid);
 
   return isRegisterFormValid;
 };
