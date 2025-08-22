@@ -1,4 +1,5 @@
 import addBook from "./addBook.js";
+import { validateAddBook } from "./validateAddBook.js";
 
 export const displayAddForm = () => {
   const main = document.querySelector("main");
@@ -22,6 +23,10 @@ export const displayAddForm = () => {
   const bookReadingStatusSelect = document.createElement("select");
   const bookReadingStatusPlaceholder = document.createElement("option");
   const submitButton = document.createElement("button");
+  const titleError = document.createElement("span");
+  const authorError = document.createElement("span");
+  const dateError = document.createElement("span");
+  const statusError = document.createElement("span");
 
   // Appending elements
   main.append(addFormContainer);
@@ -33,15 +38,17 @@ export const displayAddForm = () => {
       bookStartingDateContainer,
       bookReadingStatusContainer
     );
-  bookTitleContainer.append(bookTitleLabel, bookTitleInput);
-  bookAuthorContainer.append(bookAuthorLabel, bookAuthorInput);
+  bookTitleContainer.append(bookTitleLabel, bookTitleInput, titleError);
+  bookAuthorContainer.append(bookAuthorLabel, bookAuthorInput, authorError);
   bookStartingDateContainer.append(
     bookStartingDateLabel,
-    bookStartingDateInput
+    bookStartingDateInput,
+    dateError
   );
   bookReadingStatusContainer.append(
     bookReadingStatusLabel,
-    bookReadingStatusSelect
+    bookReadingStatusSelect,
+    statusError
   );
   bookReadingStatusSelect.append(bookReadingStatusPlaceholder);
 
@@ -61,6 +68,7 @@ export const displayAddForm = () => {
   bookStartingDateInput.name = "starting-date";
   bookReadingStatusSelect.name = "reading-status";
   bookStartingDateInput.type = "date";
+  bookReadingStatusPlaceholder.value = "";
 
   // Populating elements
   bookTitleLabel.textContent = "Title";
@@ -88,6 +96,10 @@ export const displayAddForm = () => {
   bookAuthorInput.classList.add("add-form__author-input");
   bookStartingDateInput.classList.add("add-form__date-input");
   bookReadingStatusSelect.classList.add("add-form__status-select");
+  titleError.classList.add("add-form__title-error");
+  authorError.classList.add("add-form__author-error");
+  dateError.classList.add("add-form__date-error");
+  statusError.classList.add("add-form__status-error");
 };
 
 export const setupAddForm = () => {
@@ -97,13 +109,12 @@ export const setupAddForm = () => {
   const dateInput = document.querySelector(".add-form__date-input");
   const statusSelect = document.querySelector(".add-form__status-select");
 
-  addForm.addEventListener(
-    "submit",
-    async (e) => {
-      e.preventDefault();
-      await addBook(titleInput, authorInput, dateInput, statusSelect);
-      console.log("book added successfully");
-    },
-    { once: true }
-  );
+  addForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!validateAddBook()) {
+      return;
+    }
+    await addBook(titleInput, authorInput, dateInput, statusSelect);
+    console.log("book added successfully");
+  });
 };
