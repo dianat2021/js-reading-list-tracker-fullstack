@@ -10,19 +10,6 @@ export const validateAddBook = () => {
   const addFormDateError = document.querySelector(".add-form__date-error");
   const addFormStatusError = document.querySelector(".add-form__status-error");
 
-  console.log(
-    addFormTitleInput,
-    addFormAuthorInput,
-    addFormDateInput,
-    addFormStatusSelect
-  );
-  console.log(
-    addFormTitleError,
-    addFormAuthorError,
-    addFormDateError,
-    addFormStatusError
-  );
-
   const addFormErrors = {
     titleError: "Book title is required",
     authorError: "Book author is required",
@@ -39,22 +26,27 @@ export const validateAddBook = () => {
     addFormStatusError,
   ].forEach((errorMsg) => {
     errorMsg.textContent = "";
+    errorMsg.classList.remove("add-form__input--error");
   });
 
   if (!addFormTitleInput.value.trim()) {
     addFormTitleError.textContent = addFormErrors.titleError;
+    addFormTitleError.classList.add("add-form__input--error");
     isAddFormValid = false;
   }
   if (!addFormAuthorInput.value.trim()) {
     addFormAuthorError.textContent = addFormErrors.authorError;
+    addFormAuthorError.classList.add("add-form__input--error");
     isAddFormValid = false;
   }
   if (!addFormDateInput.value.trim()) {
     addFormDateError.textContent = addFormErrors.dateError;
+    addFormDateError.classList.add("add-form__input--error");
     isAddFormValid = false;
   }
   if (!addFormStatusSelect.value.trim()) {
     addFormStatusError.textContent = addFormErrors.statusError;
+    addFormStatusError.classList.add("add-form__input--error");
     isAddFormValid = false;
   }
   return isAddFormValid;

@@ -23,3 +23,7 @@
   display: block;
   margin: var(--space-medium) auto 0 auto;
 }
+.add-form__input--error {
+  font-size: var(--small-font-size);
+  color: var(--text-error);
+}
