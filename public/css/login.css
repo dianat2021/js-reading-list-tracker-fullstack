@@ -31,3 +31,7 @@
   height: 32px;
   margin-top: var(--space-medium);
 }
+.login-form__input--error {
+  font-size: var(--small-font-size);
+  color: var(--text-error);
+}

@@ -21,17 +21,21 @@ export const validateLoginForm = () => {
 
   [loginFormEmailError, loginFormPasswordError].forEach((errorMsg) => {
     errorMsg.textContent = "";
+    errorMsg.classList.remove("login-form__input--error");
   });
 
   if (!loginFormEmailInput.value.trim()) {
     loginFormEmailError.textContent = loginErrors.emptyEmailError;
+    loginFormEmailError.classList.add("login-form__input--error");
     isLoginFormValid = false;
   } else if (!emailRegex.test(loginFormEmailInput.value.trim())) {
     loginFormEmailError.textContent = loginErrors.invalidEmailError;
+    loginFormEmailError.classList.add("login-form__input--error");
     isLoginFormValid = false;
   }
   if (!loginFormPasswordInput.value.trim()) {
     loginFormPasswordError.textContent = loginErrors.passwordError;
+    loginFormPasswordError.classList.add("login-form__input--error");
     isLoginFormValid = false;
   }
 
