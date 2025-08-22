@@ -6,9 +6,11 @@ const displayMainContent = () => {
 
   const main = document.querySelector("main");
   main.innerHTML = "";
-
   displayFilterSort();
   displayAddForm();
+  const booksContainer = document.createElement("div");
+  main.append(booksContainer);
+  booksContainer.classList.add("books-container");
 };
 
 export default displayMainContent;
