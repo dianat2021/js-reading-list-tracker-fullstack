@@ -1,4 +1,5 @@
 import addBook from "./addBook.js";
+import { renderBooks } from "./renderBooks.js";
 import { validateAddBook } from "./validateAddBook.js";
 
 export const displayAddForm = () => {
@@ -115,6 +116,7 @@ export const setupAddForm = () => {
       return;
     }
     await addBook(titleInput, authorInput, dateInput, statusSelect);
+    renderBooks();
     console.log("book added successfully");
   });
 };

@@ -22,6 +22,7 @@ const addBook = async (title, author, date, status) => {
     throw new Error("Failed to add book");
   }
   const books = await response.json();
+
   console.log(books);
 };
 

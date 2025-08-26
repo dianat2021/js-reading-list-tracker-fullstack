@@ -3,11 +3,11 @@ import { getBooks } from "./getBooks";
 export const renderBooks = async () => {
   const books = await getBooks();
   const booksContainer = document.querySelector(".books-container");
-  const booksWrapper = document.createElement("div");
-
+  const booksWrapper = document.createElement("ul");
+  booksContainer.innerHTML = "";
   books.forEach((book) => {
     // Creating elements
-    const bookCard = document.createElement("div");
+    const bookCard = document.createElement("li");
     const bookDetailsContainer = document.createElement("div");
     const bookTitle = document.createElement("span");
     const bookAuthor = document.createElement("span");
