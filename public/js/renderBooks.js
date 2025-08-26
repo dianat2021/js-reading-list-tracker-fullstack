@@ -60,7 +60,7 @@ export const renderBooks = async () => {
 
     // Adding event listeners
     deleteBookButton.addEventListener("click", () => {
-      displayDeleteModal();
+      displayDeleteModal(book._id, book.bookTitle);
     });
   });
 };

@@ -1,4 +1,7 @@
-export const displayDeleteModal = () => {
+import { deleteBook } from "./deleteBook";
+import { renderBooks } from "./renderBooks";
+
+export const displayDeleteModal = (bookID, bookTitle) => {
   const main = document.querySelector("main");
 
   // Creating elements
@@ -16,7 +19,7 @@ export const displayDeleteModal = () => {
   deleteModalButtonsContainer.append(confirmDeleteButton, cancelDeleteButton);
 
   // Populating elements
-  deleteMessage.textContent = "Are you sure you want to delete this?";
+  deleteMessage.textContent = `Are you sure you want to delete "${bookTitle}"?`;
   confirmDeleteButton.textContent = "Confirm";
   cancelDeleteButton.textContent = "Cancel";
 
@@ -30,8 +33,12 @@ export const displayDeleteModal = () => {
 
   // Adding event listeners
   cancelDeleteButton.addEventListener("click", () => {
+    deleteModalWrapper.classList.remove("delete-modal--active");
     console.log("from cancel");
-
+  });
+  confirmDeleteButton.addEventListener("click", async () => {
+    await deleteBook(bookID);
+    await renderBooks();
     deleteModalWrapper.classList.remove("delete-modal--active");
   });
 };
