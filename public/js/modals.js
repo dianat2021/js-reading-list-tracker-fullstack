@@ -3,7 +3,6 @@ export const displayDeleteModal = () => {
 
   // Creating elements
   const deleteModalWrapper = document.createElement("div");
-  console.log(deleteModalWrapper);
   const deleteModal = document.createElement("div");
   const deleteMessage = document.createElement("p");
   const deleteModalButtonsContainer = document.createElement("div");
@@ -23,8 +22,16 @@ export const displayDeleteModal = () => {
 
   // Adding class names
   deleteModalWrapper.classList.add("delete-modal-wrapper");
+  deleteModalWrapper.classList.add("delete-modal--active");
   deleteModal.classList.add("delete-modal");
   deleteModalButtonsContainer.classList.add("delete-modal__buttons-container");
   confirmDeleteButton.classList.add("delete-modal__confirm-button");
   cancelDeleteButton.classList.add("delete-modal__cancel-button");
+
+  // Adding event listeners
+  cancelDeleteButton.addEventListener("click", () => {
+    console.log("from cancel");
+
+    deleteModalWrapper.classList.remove("delete-modal--active");
+  });
 };

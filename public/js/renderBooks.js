@@ -1,4 +1,5 @@
-import { getBooks } from "./getBooks";
+import { getBooks } from "./getBooks.js";
+import { displayDeleteModal } from "./modals.js";
 
 export const renderBooks = async () => {
   const books = await getBooks();
@@ -56,5 +57,10 @@ export const renderBooks = async () => {
     bookCard.classList.add("book-card");
     bookDetailsContainer.classList.add("book-card__details-container");
     bookButtonsContainer.classList.add("book-card__buttons-container");
+
+    // Adding event listeners
+    deleteBookButton.addEventListener("click", () => {
+      displayDeleteModal();
+    });
   });
 };
