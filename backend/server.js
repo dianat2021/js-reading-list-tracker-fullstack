@@ -6,7 +6,6 @@ import connectDB from "./db/connectDB.js";
 import { authenticateUser } from "./middleware/authentication.js";
 import helmet from "helmet";
 import cors from "cors";
-import xss from "xss-clean";
 import rateLimit from "express-rate-limit";
 // Load environment variables
 dotenv.config();
