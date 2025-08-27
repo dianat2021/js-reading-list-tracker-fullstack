@@ -1,5 +1,6 @@
 import { getBooks } from "./getBooks.js";
 import { displayDeleteModal } from "./modals.js";
+import { populateForm } from "./populateForm.js";
 
 export const renderBooks = async () => {
   const books = await getBooks();
@@ -61,6 +62,14 @@ export const renderBooks = async () => {
     // Adding event listeners
     deleteBookButton.addEventListener("click", () => {
       displayDeleteModal(book._id, book.bookTitle);
+    });
+    editBookButton.addEventListener("click", () => {
+      populateForm({
+        title: book.bookTitle,
+        author: book.bookAuthor,
+        date: book.startingDate,
+        status: book.readingStatus,
+      });
     });
   });
 };
