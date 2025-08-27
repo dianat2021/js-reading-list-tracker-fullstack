@@ -1,6 +1,6 @@
 import { getBooks } from "./getBooks.js";
 import { displayDeleteModal } from "./modals.js";
-import { populateForm } from "./populateForm.js";
+import { populateEditForm } from "./populateEditForm.js";
 
 export const renderBooks = async () => {
   const books = await getBooks();
@@ -64,7 +64,7 @@ export const renderBooks = async () => {
       displayDeleteModal(book._id, book.bookTitle);
     });
     editBookButton.addEventListener("click", () => {
-      populateForm({
+      populateEditForm({
         title: book.bookTitle,
         author: book.bookAuthor,
         date: book.startingDate,
