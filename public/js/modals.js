@@ -1,4 +1,5 @@
 import { deleteBook } from "./deleteBook";
+import { editBook } from "./editBook";
 import { populateEditForm } from "./populateEditForm";
 import { renderBooks } from "./renderBooks";
 
@@ -124,5 +125,13 @@ export const displayEditModal = async (currentDetails) => {
   cancelEditButton.addEventListener("click", (e) => {
     e.preventDefault();
     editModalWrapper.classList.remove("edit-modal--active");
+  });
+  submitEditButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    console.log(currentDetails);
+
+    await editBook(currentDetails.id);
+    editModalWrapper.classList.remove("edit-modal--active");
+    renderBooks();
   });
 };

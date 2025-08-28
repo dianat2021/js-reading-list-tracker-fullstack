@@ -64,6 +64,7 @@ export const renderBooks = async () => {
     });
     editBookButton.addEventListener("click", () => {
       displayEditModal({
+        id: book._id,
         title: book.bookTitle,
         author: book.bookAuthor,
         date: book.startingDate,
