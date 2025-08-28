@@ -1,6 +1,5 @@
 .edit-modal-wrapper {
-  /* display: none; */
-  display: flex;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -35,4 +34,8 @@
 .edit-form__submit-button,
 .edit-form__cancel-button {
   height: 24px;
+}
+
+.edit-modal--active {
+  display: flex;
 }

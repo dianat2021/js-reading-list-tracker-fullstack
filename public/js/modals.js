@@ -97,6 +97,7 @@ export const displayEditModal = async (currentDetails) => {
   );
   // Adding class names
   editModalWrapper.classList.add("edit-modal-wrapper");
+  editModalWrapper.classList.add("edit-modal--active");
   editForm.classList.add("edit-form");
   bookTitleInput.classList.add("edit-form__title-input");
   bookAuthorInput.classList.add("edit-form__author-input");
@@ -119,4 +120,9 @@ export const displayEditModal = async (currentDetails) => {
     bookReadingStatusSelect.append(statusOption);
   });
   populateEditForm(currentDetails);
+  // Adding event listeners
+  cancelEditButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    editModalWrapper.classList.remove("edit-modal--active");
+  });
 };
