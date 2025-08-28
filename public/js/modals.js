@@ -102,8 +102,14 @@ export const displayEditModal = async (currentDetails) => {
   bookAuthorInput.classList.add("edit-form__author-input");
   bookStartingDateInput.classList.add("edit-form__date-input");
   bookReadingStatusSelect.classList.add("edit-form__status-select");
+  submitEditButton.classList.add("edit-form__submit-button");
+  cancelEditButton.classList.add("edit-form__cancel-button");
 
   // Populating the edit form with current details
+  bookTitleLabel.textContent = "Title";
+  bookAuthorLabel.textContent = "Author";
+  bookStartingDateLabel.textContent = "Starting date";
+  bookReadingStatusLabel.textContent = "Status";
   submitEditButton.textContent = "Confirm edit";
   cancelEditButton.textContent = "Cancel edit";
   statusOptions.forEach((option) => {
