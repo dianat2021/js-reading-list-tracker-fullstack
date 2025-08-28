@@ -2,6 +2,7 @@ import { deleteBook } from "./deleteBook";
 import { editBook } from "./editBook";
 import { populateEditForm } from "./populateEditForm";
 import { renderBooks } from "./renderBooks";
+import { validateEditForm } from "./validateEditForm";
 
 export const displayDeleteModal = (bookID, bookTitle) => {
   const main = document.querySelector("main");
@@ -104,6 +105,10 @@ export const displayEditModal = async (currentDetails) => {
   bookAuthorInput.classList.add("edit-form__author-input");
   bookStartingDateInput.classList.add("edit-form__date-input");
   bookReadingStatusSelect.classList.add("edit-form__status-select");
+  titleError.classList.add("edit-form__title-error");
+  authorError.classList.add("edit-form__author-error");
+  dateError.classList.add("edit-form__date-error");
+  statusError.classList.add("edit-form__dtatus-error");
   submitEditButton.classList.add("edit-form__submit-button");
   cancelEditButton.classList.add("edit-form__cancel-button");
 
@@ -124,14 +129,18 @@ export const displayEditModal = async (currentDetails) => {
   // Adding event listeners
   cancelEditButton.addEventListener("click", (e) => {
     e.preventDefault();
-    editModalWrapper.classList.remove("edit-modal--active");
+    editModalWrapper.remove();
+    editForm.reset();
   });
   submitEditButton.addEventListener("click", async (e) => {
     e.preventDefault();
-    console.log(currentDetails);
-
+    if (!validateEditForm()) {
+      return;
+    }
     await editBook(currentDetails.id);
-    editModalWrapper.classList.remove("edit-modal--active");
+    editModalWrapper.remove();
+
+    editForm.reset();
     renderBooks();
   });
 };
