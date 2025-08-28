@@ -44,8 +44,12 @@ export const displayDeleteModal = (bookID, bookTitle) => {
   });
 };
 
-const displayEditModal = async (currentDetails) => {
+// ----------------------------------------------------------
+
+export const displayEditModal = async (currentDetails) => {
   const main = document.querySelector("main");
+  const statusOptions = ["Reading", "Finished", "Stopped"];
+
   // Creating elements
   const editModalWrapper = document.createElement("div");
   const editForm = document.createElement("form");
@@ -66,6 +70,7 @@ const displayEditModal = async (currentDetails) => {
   const dateError = document.createElement("span");
   const statusError = document.createElement("span");
   const submitEditButton = document.createElement("button");
+  const cancelEditButton = document.createElement("button");
 
   // Appending elements
   main.append(editModalWrapper);
@@ -75,7 +80,8 @@ const displayEditModal = async (currentDetails) => {
     bookAuthorContainer,
     bookStartingDateContainer,
     bookReadingStatusContainer,
-    submitEditButton
+    submitEditButton,
+    cancelEditButton
   );
   bookTitleContainer.append(bookTitleLabel, bookTitleInput, titleError);
   bookAuthorContainer.append(bookAuthorLabel, bookAuthorInput, authorError);
@@ -90,10 +96,21 @@ const displayEditModal = async (currentDetails) => {
     statusError
   );
   // Adding class names
+  editModalWrapper.classList.add("edit-modal-wrapper");
+  editForm.classList.add("edit-form");
   bookTitleInput.classList.add("edit-form__title-input");
   bookAuthorInput.classList.add("edit-form__author-input");
   bookStartingDateInput.classList.add("edit-form__date-input");
   bookReadingStatusSelect.classList.add("edit-form__status-select");
+
   // Populating the edit form with current details
+  submitEditButton.textContent = "Confirm edit";
+  cancelEditButton.textContent = "Cancel edit";
+  statusOptions.forEach((option) => {
+    const statusOption = document.createElement("option");
+    statusOption.textContent = option;
+    statusOption.value = option.toLocaleLowerCase();
+    bookReadingStatusSelect.append(statusOption);
+  });
   populateEditForm(currentDetails);
 };
