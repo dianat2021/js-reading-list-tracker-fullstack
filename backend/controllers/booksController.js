@@ -3,8 +3,22 @@ import { Book } from "../models/bookModel.js";
 
 export const getAllBooks = async (req, res) => {
   try {
+    const { sort } = req.query;
+    const sortMap = {
+      "ascending-(a-z)": "bookTitle",
+      "descending-(z-a)": "-bookTitle",
+      "newest-entries": "-createdAt",
+      "oldest-entries": "createdAt",
+    };
+
+    const selectedSort = sortMap[sort];
+    console.log(selectedSort);
+
+    // Default sort if none is provided
+    const sortOption = selectedSort || "createdAt";
+
     const books = await Book.find({ createdBy: req.user.userID }).sort(
-      "createdAt"
+      sortOption
     );
 
     res.status(StatusCodes.OK).json({ books, total: books.length });

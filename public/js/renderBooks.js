@@ -1,8 +1,10 @@
 import { getBooks } from "./getBooks.js";
 import { displayDeleteModal, displayEditModal } from "./modals.js";
 
-export const renderBooks = async () => {
-  const books = await getBooks();
+export const renderBooks = async (filteredBooks = null) => {
+  console.log(filteredBooks);
+
+  const books = filteredBooks || (await getBooks());
   const booksContainer = document.querySelector(".books-container");
   const booksWrapper = document.createElement("ul");
   booksContainer.innerHTML = "";

@@ -9,7 +9,6 @@ export const authenticateUser = async (req, res, next) => {
     return res.status(StatusCodes.UNAUTHORIZED).send("Invalid authentication");
   }
   const token = authHeader.split(" ")[1];
-  console.log("Token", token);
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);

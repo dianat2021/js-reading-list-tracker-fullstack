@@ -50,7 +50,9 @@ export const displayFilterSort = () => {
   sortCriteria.forEach((criteria) => {
     const option = document.createElement("option");
     option.textContent = criteria;
-    option.value = criteria.toLocaleLowerCase();
+    const formattedCriteria = criteria.split(" ").join("-").toLowerCase();
+
+    option.value = formattedCriteria;
     sortSelect.append(option);
   });
 
@@ -59,4 +61,5 @@ export const displayFilterSort = () => {
   sortFilterWrapper.classList.add("sort-filter-wrapper");
   sortContainer.classList.add("sort");
   filterContainer.classList.add("filter");
+  sortSelect.classList.add("sort__select");
 };
