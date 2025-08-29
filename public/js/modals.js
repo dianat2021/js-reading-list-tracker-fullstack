@@ -73,6 +73,7 @@ export const displayEditModal = async (currentDetails) => {
   const statusError = document.createElement("span");
   const submitEditButton = document.createElement("button");
   const cancelEditButton = document.createElement("button");
+  const defaultStatusOption = document.createElement("option");
 
   // Appending elements
   main.append(editModalWrapper);
@@ -97,6 +98,21 @@ export const displayEditModal = async (currentDetails) => {
     bookReadingStatusSelect,
     statusError
   );
+  bookReadingStatusSelect.append(defaultStatusOption);
+  // Adding attributes
+  bookStartingDateInput.type = "date";
+  bookTitleLabel.htmlFor = "title";
+  bookAuthorLabel.htmlFor = "author";
+  bookStartingDateLabel.htmlFor = "date";
+  bookReadingStatusLabel.htmlFor = "status";
+  bookTitleInput.id = "title";
+  bookAuthorInput.id = "author";
+  bookStartingDateInput.id = "date";
+  bookReadingStatusSelect.id = "status";
+  bookTitleInput.name = "title";
+  bookAuthorInput.name = "author";
+  bookStartingDateInput.name = "date";
+  bookReadingStatusSelect.name = "status";
   // Adding class names
   editModalWrapper.classList.add("edit-modal-wrapper");
   editModalWrapper.classList.add("edit-modal--active");
@@ -119,6 +135,8 @@ export const displayEditModal = async (currentDetails) => {
   bookReadingStatusLabel.textContent = "Status";
   submitEditButton.textContent = "Confirm edit";
   cancelEditButton.textContent = "Cancel edit";
+  defaultStatusOption.textContent = "Select reading status";
+  defaultStatusOption.value = "";
   statusOptions.forEach((option) => {
     const statusOption = document.createElement("option");
     statusOption.textContent = option;
