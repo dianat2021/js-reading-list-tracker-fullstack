@@ -18,7 +18,7 @@
   min-width: 360px;
   max-width: 600px;
   padding: var(--space-medium);
-  background-color: lightpink;
+  background-color: var(--background-color-light);
   border-radius: var(--border-radius-small);
 }
 .edit-form div > * {
@@ -38,4 +38,8 @@
 
 .edit-modal--active {
   display: flex;
+}
+.edit-form__input--error {
+  font-size: var(--small-font-size);
+  color: var(--text-error);
 }

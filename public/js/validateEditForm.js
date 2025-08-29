@@ -28,18 +28,25 @@ export const validateEditForm = () => {
 
   if (!bookTitleInput.value.trim()) {
     titleErrorSpan.textContent = errors.titleError;
+    titleErrorSpan.classList.add("edit-form__input--error");
     isEditFormValid = false;
   }
   if (!bookAuthorInput.value.trim()) {
     authorErrorSpan.textContent = errors.authorError;
+    authorErrorSpan.classList.add("edit-form__input--error");
+
     isEditFormValid = false;
   }
   if (!bookStartingDateInput.value.trim()) {
     dateErrorSpan.textContent = errors.startingDateError;
+    dateErrorSpan.classList.add("edit-form__input--error");
+
     isEditFormValid = false;
   }
   if (!bookReadingStatusSelect.value.trim()) {
     statusErrorSpan.textContent = errors.readingStatusError;
+    statusErrorSpan.classList.add("edit-form__input--error");
+
     isEditFormValid = false;
   }
   return isEditFormValid;
