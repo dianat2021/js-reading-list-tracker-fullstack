@@ -8,6 +8,16 @@ export const renderBooks = async (filteredBooks = null) => {
   const booksContainer = document.querySelector(".books-container");
   const booksWrapper = document.createElement("ul");
   booksContainer.innerHTML = "";
+  booksContainer.append(booksWrapper);
+
+  // If there are no books in the list to display
+  if (books.length === 0) {
+    const emptyListMessage = document.createElement("p");
+    emptyListMessage.textContent = "Book list is empty. Start adding books!";
+    booksWrapper.append(emptyListMessage);
+    booksWrapper.classList.add("books--empty");
+    return;
+  }
   books.forEach((book) => {
     // Creating elements
     const bookCard = document.createElement("li");
@@ -23,7 +33,6 @@ export const renderBooks = async (filteredBooks = null) => {
     const editBookButton = document.createElement("button");
 
     // Appending elements
-    booksContainer.append(booksWrapper);
     booksWrapper.append(bookCard);
     bookCard.append(bookDetailsContainer);
     bookDetailsContainer.append(

@@ -28,3 +28,12 @@
   gap: var(--space-medium);
   padding: var(--space-small) 0;
 }
+
+.books--empty {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-light);
+  font-size: var(--medium-font-size);
+}
