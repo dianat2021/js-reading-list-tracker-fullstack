@@ -2,85 +2,95 @@ import { getBooks } from "./getBooks.js";
 import { displayDeleteModal, displayEditModal } from "./modals.js";
 
 export const renderBooks = async (filteredBooks = null) => {
-  console.log(filteredBooks);
-
-  const books = filteredBooks || (await getBooks());
   const booksContainer = document.querySelector(".books-container");
+  const errorMessage = document.createElement("p");
   const booksWrapper = document.createElement("ul");
-  booksContainer.innerHTML = "";
   booksContainer.append(booksWrapper);
+  try {
+    booksWrapper.innerHTML = "";
+    const books = filteredBooks || (await getBooks());
+    console.log("from render", books);
 
-  // If there are no books in the list to display
-  if (books.length === 0) {
-    const emptyListMessage = document.createElement("p");
-    emptyListMessage.textContent = "Book list is empty. Start adding books!";
-    booksWrapper.append(emptyListMessage);
-    booksWrapper.classList.add("books--empty");
-    return;
-  }
-  books.forEach((book) => {
-    // Creating elements
-    const bookCard = document.createElement("li");
-    const bookDetailsContainer = document.createElement("div");
-    const bookTitle = document.createElement("span");
-    const bookAuthor = document.createElement("span");
-    const bookStartingDate = document.createElement("span");
-    const bookStatus = document.createElement("span");
-    const bookCreatedAt = document.createElement("span");
-    const bookUpdatedAt = document.createElement("span");
-    const bookButtonsContainer = document.createElement("div");
-    const deleteBookButton = document.createElement("button");
-    const editBookButton = document.createElement("button");
+    // If there are no books in the list to display
+    if (books.length === 0) {
+      const emptyListMessage = document.createElement("p");
+      emptyListMessage.textContent = "Book list is empty. Start adding books!";
+      booksWrapper.append(emptyListMessage);
+      booksWrapper.classList.add("books--empty");
+      console.log("from empty");
 
-    // Appending elements
-    booksWrapper.append(bookCard);
-    bookCard.append(bookDetailsContainer);
-    bookDetailsContainer.append(
-      bookTitle,
-      bookAuthor,
-      bookStartingDate,
-      bookStatus,
-      bookCreatedAt,
-      bookUpdatedAt,
-      bookButtonsContainer
-    );
-    bookButtonsContainer.append(deleteBookButton, editBookButton);
+      return;
+    }
+    books.forEach((book) => {
+      // Creating elements
+      const bookCard = document.createElement("li");
+      const bookDetailsContainer = document.createElement("div");
+      const bookTitle = document.createElement("span");
+      const bookAuthor = document.createElement("span");
+      const bookStartingDate = document.createElement("span");
+      const bookStatus = document.createElement("span");
+      const bookCreatedAt = document.createElement("span");
+      const bookUpdatedAt = document.createElement("span");
+      const bookButtonsContainer = document.createElement("div");
+      const deleteBookButton = document.createElement("button");
+      const editBookButton = document.createElement("button");
 
-    // Populating elements
-    const formattedStartingDate = new Date(
-      book.startingDate
-    ).toLocaleDateString();
-    const formattedCreatedAt = new Date(book.createdAt).toLocaleDateString();
-    const formattedUpdatedAt = new Date(book.createdAt).toLocaleString();
-    const formattedReadingStatus =
-      book.readingStatus.charAt(0).toUpperCase() + book.readingStatus.slice(1);
-    bookTitle.textContent = `Title: ${book.bookTitle}`;
-    bookAuthor.textContent = `Author: ${book.bookAuthor}`;
-    bookStartingDate.textContent = `Starting date: ${formattedStartingDate}`;
-    bookStatus.textContent = `Status: ${formattedReadingStatus}`;
-    bookCreatedAt.textContent = `Created on: ${formattedCreatedAt}`;
-    bookUpdatedAt.textContent = `Updated at: ${formattedUpdatedAt}`;
-    deleteBookButton.textContent = "Delete";
-    editBookButton.textContent = "Edit";
+      // Appending elements
+      booksWrapper.append(bookCard);
+      bookCard.append(bookDetailsContainer);
+      bookDetailsContainer.append(
+        bookTitle,
+        bookAuthor,
+        bookStartingDate,
+        bookStatus,
+        bookCreatedAt,
+        bookUpdatedAt,
+        bookButtonsContainer
+      );
+      bookButtonsContainer.append(deleteBookButton, editBookButton);
 
-    // Adding class names
-    booksWrapper.classList.add("books");
-    bookCard.classList.add("book-card");
-    bookDetailsContainer.classList.add("book-card__details-container");
-    bookButtonsContainer.classList.add("book-card__buttons-container");
+      // Populating elements
+      const formattedStartingDate = new Date(
+        book.startingDate
+      ).toLocaleDateString();
+      const formattedCreatedAt = new Date(book.createdAt).toLocaleDateString();
+      const formattedUpdatedAt = new Date(book.createdAt).toLocaleString();
+      const formattedReadingStatus =
+        book.readingStatus.charAt(0).toUpperCase() +
+        book.readingStatus.slice(1);
+      bookTitle.textContent = `Title: ${book.bookTitle}`;
+      bookAuthor.textContent = `Author: ${book.bookAuthor}`;
+      bookStartingDate.textContent = `Starting date: ${formattedStartingDate}`;
+      bookStatus.textContent = `Status: ${formattedReadingStatus}`;
+      bookCreatedAt.textContent = `Created on: ${formattedCreatedAt}`;
+      bookUpdatedAt.textContent = `Updated at: ${formattedUpdatedAt}`;
+      deleteBookButton.textContent = "Delete";
+      editBookButton.textContent = "Edit";
 
-    // Adding event listeners
-    deleteBookButton.addEventListener("click", () => {
-      displayDeleteModal(book._id, book.bookTitle);
-    });
-    editBookButton.addEventListener("click", () => {
-      displayEditModal({
-        id: book._id,
-        title: book.bookTitle,
-        author: book.bookAuthor,
-        date: book.startingDate,
-        status: book.readingStatus,
+      // Adding class names
+      booksWrapper.classList.add("books");
+      bookCard.classList.add("book-card");
+      bookDetailsContainer.classList.add("book-card__details-container");
+      bookButtonsContainer.classList.add("book-card__buttons-container");
+
+      // Adding event listeners
+      deleteBookButton.addEventListener("click", () => {
+        displayDeleteModal(book._id, book.bookTitle);
+      });
+      editBookButton.addEventListener("click", () => {
+        displayEditModal({
+          id: book._id,
+          title: book.bookTitle,
+          author: book.bookAuthor,
+          date: book.startingDate,
+          status: book.readingStatus,
+        });
       });
     });
-  });
+  } catch (error) {
+    booksWrapper.append(errorMessage);
+    errorMessage.textContent =
+      "Failed to fetch books. Please refresh the page or try again later.";
+    booksWrapper.classList.add("fetch-error");
+  }
 };
