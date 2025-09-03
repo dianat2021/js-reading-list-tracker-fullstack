@@ -1,4 +1,5 @@
 import { deleteBook } from "./deleteBook";
+import { displayToast } from "./displayToast";
 import { editBook } from "./editBook";
 import { populateEditForm } from "./populateEditForm";
 import { renderBooks } from "./renderBooks";
@@ -151,14 +152,18 @@ export const displayEditModal = async (currentDetails) => {
     editForm.reset();
   });
   submitEditButton.addEventListener("click", async (e) => {
-    e.preventDefault();
-    if (!validateEditForm()) {
-      return;
-    }
-    await editBook(currentDetails.id);
-    editModalWrapper.remove();
+    try {
+      e.preventDefault();
+      if (!validateEditForm()) {
+        return;
+      }
+      await editBook(currentDetails.id);
+      editModalWrapper.remove();
 
-    editForm.reset();
-    renderBooks();
+      editForm.reset();
+      await renderBooks();
+    } catch (error) {
+      displayToast("Error editing the book. Please try again.");
+    }
   });
 };
