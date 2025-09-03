@@ -111,12 +111,15 @@ export const setupAddForm = () => {
   const statusSelect = document.querySelector(".add-form__status-select");
 
   addForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!validateAddBook()) {
-      return;
+    try {
+      e.preventDefault();
+      if (!validateAddBook()) {
+        return;
+      }
+      await addBook(titleInput, authorInput, dateInput, statusSelect);
+      renderBooks();
+    } catch (error) {
+      throw new Error("Error adding the book!");
     }
-    await addBook(titleInput, authorInput, dateInput, statusSelect);
-    renderBooks();
-    console.log("book added successfully");
   });
 };

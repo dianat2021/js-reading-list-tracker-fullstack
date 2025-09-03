@@ -1,4 +1,5 @@
 .toast-wrapper {
+  display: none;
   position: fixed;
   top: 0;
   left: 50%;
@@ -26,7 +27,7 @@
   background-color: pink;
   border-bottom-left-radius: var(--border-radius-small);
   border-bottom-right-radius: var(--border-radius-small);
-  transition: all 0.2s;
+  transition: top 0.5s;
 }
 .toast button {
   height: 24px;

@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   handleRoute();
   await renderBooks();
   applySortFilter();
-  displayToast("Error adding the book. Please try again.");
 });
 
 // Selecting elements

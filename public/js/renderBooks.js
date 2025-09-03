@@ -5,9 +5,9 @@ export const renderBooks = async (filteredBooks = null) => {
   const booksContainer = document.querySelector(".books-container");
   const errorMessage = document.createElement("p");
   const booksWrapper = document.createElement("ul");
+  booksContainer.innerHTML = "";
   booksContainer.append(booksWrapper);
   try {
-    booksWrapper.innerHTML = "";
     const books = filteredBooks || (await getBooks());
     console.log("from render", books);
 

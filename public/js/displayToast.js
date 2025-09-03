@@ -18,4 +18,17 @@ export const displayToast = (error) => {
   // Adding class names
   toastOverlay.classList.add("toast-wrapper");
   toast.classList.add("toast");
+  toastOverlay.classList.add("toast-wrapper--active");
+
+  setTimeout(() => {
+    toast.classList.add("toast--active");
+  }, 50);
+  okButton.addEventListener(
+    "click",
+    () => {
+      toastOverlay.classList.remove("toast-wrapper--active");
+      toast.classList.remove("toast--active");
+    },
+    { once: true }
+  );
 };
