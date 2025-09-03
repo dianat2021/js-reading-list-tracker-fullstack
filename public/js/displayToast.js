@@ -1,5 +1,7 @@
 export const displayToast = (error) => {
   const main = document.querySelector("main");
+  const existingToast = document.querySelector(".toast-wrapper");
+  if (existingToast) return; // Prevent duplicate
   // Create elements
   const toastOverlay = document.createElement("div");
   const toast = document.createElement("div");
@@ -22,12 +24,11 @@ export const displayToast = (error) => {
 
   setTimeout(() => {
     toast.classList.add("toast--active");
-  }, 50);
+  }, 0);
   okButton.addEventListener(
     "click",
     () => {
-      toastOverlay.classList.remove("toast-wrapper--active");
-      toast.classList.remove("toast--active");
+      toastOverlay.remove();
     },
     { once: true }
   );

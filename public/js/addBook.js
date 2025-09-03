@@ -8,7 +8,7 @@ const addBook = async (title, author, date, status) => {
     if (!token) {
       throw new Error("Authentication token missing. Please log in.");
     }
-    const response = await fetch("http://localhost:6006/api/v1/book/", {
+    const response = await fetch("http://localhost:6006/api/v1/books/", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -22,8 +22,7 @@ const addBook = async (title, author, date, status) => {
       }),
     });
     if (!response.ok) {
-      displayToast("Error adding book. Please try again.");
-      return;
+      throw new Error("Error adding book. Please try again.");
     }
     const books = await response.json();
 

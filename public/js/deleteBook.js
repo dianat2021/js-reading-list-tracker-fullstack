@@ -1,3 +1,4 @@
+import { displayToast } from "./displayToast.js";
 export const deleteBook = async (bookID) => {
   try {
     const token = localStorage.getItem("token");
@@ -15,12 +16,11 @@ export const deleteBook = async (bookID) => {
       }
     );
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || "Failed to delete book");
+      throw new Error("Error deleting book. Please try again.");
     }
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log(error);
+    displayToast("Error deleting book. Please try again.");
   }
 };
